@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="col-md-11">
+    <table class="table table-striped table-bordered bg-write table-sm">
+        <thead>
+            <tr>
+                <td>N° de Solicitud</td>
+                <td>Nombre</td>
+                <td>Apellido</td>
+                <td>Correo</td>
+                <td>Celular</td>
+                <td>Direccion</td>
+                <td>Fecha de Inicio</td>
+                <td>Estado</td>
+                <td>Actualizacion</td>
+                <td>Operaciones</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in  clientes %}
+            <tr>
+                <td> {{cliente.1}} </td>
+                <td> {{cliente.2}} </td>
+                <td> {{cliente.3}} </td>
+                <td> {{cliente.4}} </td>
+                <td> {{cliente.5}} </td>
+                <td> {{cliente.6}} </td>
+                <td> {{cliente.7}} </td>
+                <td> {{cliente.8}} </td>
+                <td> {{cliente.9}} </td>
+                    <td>
+                    <a href="/edit/{{cliente.0}}" class="btn btn-secondary">Editar</a>
+                    <a href="/delete/{{cliente.0}}" class="btn btn-danger">Borrar</a>
+                    </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="col-md-91">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages%}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif%}
+    {%endwith%}
+    <div class="card card-body">
+        <form action="/add_cliente" method="POST">
+            <div>
+                <input type="text" name="numerosolicitud" placeholder="N° de Solicitud" class="form-control">
+                <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+                <input type="text" name="apellido" placeholder="Apellido" class="form-control">
+                <input type="text" name="correo" placeholder="Correo" class="form-control">
+                <input type="text" name="celular" placeholder="Celular" class="form-control">
+                <input type="text" name="direccion" placeholder="Direccion" class="form-control">
+                <input type="text" name="fechainicio" placeholder="Fecha de inicio" class="form-control">
+                <input type="text" name="estado" placeholder="Estado" class="form-control">
+                <input type="text" name="actualizacion" placeholder="Actualizacion" class="form-control">
+            </div>
+
+            <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-block">
+                    Guardar
+            </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
